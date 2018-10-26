@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
     "framework7": "^3.0.1",
     "framework7-icons": "^0.9.1",
     "framework7-react": "^3.0.1",

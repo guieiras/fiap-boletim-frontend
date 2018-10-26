@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
-import { Block, Input, Label, List, ListItem, Page, Navbar } from 'framework7-react';
+import {
+  Block,
+  Button,
+  Checkbox,
+  Input,
+  Label,
+  List,
+  ListItem,
+  Page,
+  Navbar
+} from 'framework7-react';
+import { encrypt } from '../../library/crypto';
 
 export default class LoginPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { rm: '', password: '' }
-    this.updateRM = this.updateRM.bind(this)
-    this.updatePassword = this.updatePassword.bind(this)
+    this.state = { rm: '', password: '', remember: true };
+    this.authenticate = this.authenticate.bind(this);
+    this.setRemember = this.setRemember.bind(this);
+    this.updateRM = this.updateRM.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
   }
 
   render() {
@@ -24,8 +37,26 @@ export default class LoginPage extends Component {
           <Label>Senha</Label>
           <Input value={this.state.password} type="password" onInput={this.updatePassword} />
         </ListItem>
+        <ListItem title="Lembrar-me">
+          <Checkbox slot="media" onChange={this.setRemember} checked={this.state.remember}/>
+        </ListItem>
       </List>
+      <Block>
+        <Button big raised fill onClick={this.authenticate}>Login</Button>
+      </Block>
     </Page>
+  }
+
+  authenticate() {
+    const { rm, password } = this.state;
+    if(this.state.remember) {
+      localStorage.setItem('_clientToken', encrypt({ rm, password }));
+    }
+    alert(rm + '-' + password);
+  }
+
+  setRemember() {
+    this.setState({ remember: !this.state.remember });
   }
 
   updateRM(event) {
@@ -35,4 +66,5 @@ export default class LoginPage extends Component {
   updatePassword(event) {
     this.setState({ password: event.target.value });
   }
+
 }
