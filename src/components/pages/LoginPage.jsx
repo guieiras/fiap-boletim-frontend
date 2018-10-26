@@ -15,6 +15,9 @@ import { encrypt } from '../../library/crypto';
 export default class LoginPage extends Component {
   constructor(props) {
     super(props);
+      if (sessionStorage.getItem('_clientToken')) {
+        this.$f7router.navigate('/boletim');
+      }
     this.state = { rm: '', password: '', remember: true };
     this.authenticate = this.authenticate.bind(this);
     this.setRemember = this.setRemember.bind(this);
