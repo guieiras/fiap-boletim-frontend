@@ -49,10 +49,14 @@ export default class LoginPage extends Component {
 
   authenticate() {
     const { rm, password } = this.state;
+    const token = encrypt({ rm, password });
+
     if(this.state.remember) {
-      localStorage.setItem('_clientToken', encrypt({ rm, password }));
+      localStorage.setItem('_clientToken', token);
     }
-    alert(rm + '-' + password);
+    sessionStorage.setItem('_clientToken', token);
+
+    this.$f7router.navigate('/boletim');
   }
 
   setRemember() {
@@ -66,5 +70,4 @@ export default class LoginPage extends Component {
   updatePassword(event) {
     this.setState({ password: event.target.value });
   }
-
 }
