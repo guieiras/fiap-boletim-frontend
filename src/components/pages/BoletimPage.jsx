@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Block, BlockTitle, Card, Navbar, Page } from 'framework7-react';
 import { decrypt } from '../../library/crypto';
+import Boletim from '../base/Boletim';
 
 export default class BoletimPage extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class BoletimPage extends Component {
       case 'initial':
         return <Card content="Carregando Boletim" />
       case 'success':
-        return <div>OK</div>
+        return <Boletim boletim={this.state.boletim} />
     }
   }
 }

@@ -1,1 +1,22 @@
 /* Your app styles here */
+table {
+  border-collapse: collapse;
+  width: 100%
+}
+
+table, th, td {
+  border: 1px solid #999999;
+  text-align: center;
+}
+
+th, td {
+  width: 12.5%;
+}
+
+th.first, td.first {
+  background-color: #e0e0e0
+}
+
+th.second, td.second {
+  background-color: #eeeeee
+}
